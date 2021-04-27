@@ -26,8 +26,12 @@ function AddPersonForm(props) {
   }
 
   function handleSubmit(e) {
-    props.handleSubmit(person);
-    setPerson(""); //clear value after adding a new person
+    if(person.match(/[a-zA-Z]+/)) {
+      props.handleSubmit(person);
+      setPerson(""); //clear value after adding a new person
+    } else {
+      alert("Not valid!")
+    }
     e.preventDefault();
   }
   return (
