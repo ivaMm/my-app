@@ -18,23 +18,24 @@ ReactDOM.render(
 reportWebVitals();
 */
 
-function AddPersonForm() {
-  const [person, setPerson ] = useState
-  ("");
+function AddPersonForm(props) {
+  const [person, setPerson ] = useState("");
 
   function handleChange(e) {
     setPerson(e.target.value);
   }
 
   function handleSubmit(e) {
-    e.preventDeafault();
+    props.handleSubmit(person);
+    setPerson(""); //clear value after adding a new person
+    e.preventDefault();
   }
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} >
       <input type="text"
         placeholder="Add new contact"
         onChange={handleChange}
-        value={person.name} />
+        value={person} />
       <button type="submit">Add</button>
     </form>
   );
@@ -48,14 +49,24 @@ function PeopleList(props) {
   return <ul>{listItems}</ul>;
 }
 
+function ContactManager(props) {
+  const [contacts, setContacts] = useState(props.data);
+
+  function addPerson(name) {
+    setContacts([...contacts, name]);
+  }
+
+  return (
+    <div>
+      <AddPersonForm handleSubmit={addPerson} />
+      <PeopleList data={contacts} />
+    </div>
+  );
+}
+
 const contacts = ["James Smith", "Thomas Anderson", "Bruce Wayne"];
-const el = (
-  <div>
-    <AddPersonForm />
-    <PeopleList data={contacts} />
-  </div>
-);
+
 ReactDOM.render(
-  el,
+  <ContactManager data={contacts} />,
   document.getElementById('root')
-)
+);
