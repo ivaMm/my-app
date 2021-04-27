@@ -66,7 +66,22 @@ function ContactManager(props) {
 
 const contacts = ["James Smith", "Thomas Anderson", "Bruce Wayne"];
 
+function Title() {
+  return (
+    <h1>Contact Manager</h1>
+  );
+}
+
+function MyApp() {
+  return(
+    <div className="my-app">
+      <Title />
+      <ContactManager data={contacts} />
+    </div>
+  );
+}
+
 ReactDOM.render(
-  <ContactManager data={contacts} />,
+  <MyApp />,
   document.getElementById('root')
 );
