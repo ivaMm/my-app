@@ -18,6 +18,21 @@ ReactDOM.render(
 reportWebVitals();
 */
 
+function Counter() {
+  const [counter, setCounter] = useState(0);
+
+  function increment() {
+    setCounter(counter+1);
+  }
+  return(
+    <div class='counter-box'>
+    <h3>Counter</h3>
+    <p>{counter}</p>
+    <button onClick={increment}>Increment</button>
+    </div>
+  );
+}
+
 function AddPersonForm(props) {
   const [person, setPerson ] = useState("");
 
@@ -61,7 +76,8 @@ function ContactManager(props) {
   }
 
   return (
-    <div>
+    <div class='contact-manager-box'>
+      <h3>Contact Manager</h3>
       <AddPersonForm handleSubmit={addPerson} />
       <PeopleList data={contacts} />
     </div>
@@ -70,16 +86,10 @@ function ContactManager(props) {
 
 const contacts = ["James Smith", "Thomas Anderson", "Bruce Wayne"];
 
-function Title() {
-  return (
-    <h1>Contact Manager</h1>
-  );
-}
-
 function MyApp() {
   return(
     <div className="my-app">
-      <Title />
+      <Counter />
       <ContactManager data={contacts} />
     </div>
   );
